@@ -1,9 +1,15 @@
+const submitButton = document.getElementById("llama-submit");
+const textInput = document.getElementById("llama-input");
+const loaderContainer = document.getElementById("loader-container");
+const llamaAnswer = document.getElementById("llama-answer");
+
 function submitQuestion() {
-    const submitButton = document.getElementById("llama-submit");
-    const textInput = document.getElementById("llama-input");
-    submitButton.addEventListener("click", () => {
+        submitButton.addEventListener("click", () => {
+        llamaAnswer.style.display = "none";
+        loaderContainer.style.display = "flex";
         if (answerException(textInput.value)) {
-            console.log("Exception");
+            loaderContainer.style.display = "none";
+            llamaAnswer.style.display = "block";
             renderApiAnswer("Cet homme est un Dieu dans plusieurs pays, je ne peux rien dire d'autre");
             return;
         }
@@ -19,7 +25,11 @@ function submitQuestion() {
             }),
         })
         .then(response => response.json())
-        .then(data => renderApiAnswer((data)))
+        .then(data => {
+            loaderContainer.style.display = "none";
+            llamaAnswer.style.display = "block";
+            renderApiAnswer((data))
+        })
         .catch(error => console.error('Frontend - fetch error:', error));
     })
 }
@@ -32,8 +42,14 @@ function renderApiAnswer(data) {
 
 function answerException(question) {
     let exception = false;
-    const exceptionWords = "David Dielen";
+    const specialWords = "David Dielen";
     if (question.includes(specialWords)) {
         return true;
     }
 }
+
+document.addEventListener('keypress', e => {
+    if (e.key === 'Enter') {
+        submitButton.click();
+    }
+});

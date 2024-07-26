@@ -3,38 +3,21 @@
     <head>
         <meta charset="UTF-8">
         <title>LlamaAI Test</title>
-        <style>
-            .input-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                padding-bottom: 3rem;
-                border-bottom: solid darkslategrey 3px;
-            }
-            #llama-input{
-                margin: 1rem 0 2rem 0;
-            }
-            #llama-submit{
-                padding: 0.5rem 2rem;
-                color: white;
-                font-weight: bold;
-                background-color: darkslategrey;
-                opacity: 80%;
-                cursor: pointer;
-            }
-            #llama-answer{
-                margin: 3rem 20%;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <div class="input-container">
-            <label for="llama-input">How can I help you:</label>
-            <textarea id="llama-input" name="llama-input" rows="4" cols="50"></textarea>
+            <H1>How can I help you:</H1>
+            <label for="llama-input"></label>
+            <textarea id="llama-input" rows="5" cols="60"></textarea>
             <button id="llama-submit">Go</button>
         </div>
         <div id="llama-answer"></div>
+        <div id="loader-container">
+            <div id="loader"></div>
+        </div>
 
-        <script src="js/index.js"></script>
+
+        <script src="index.js"></script>
     </body>
 </html>
